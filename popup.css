@@ -1,0 +1,151 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    height: 600px;
+    overflow: hidden;
+    background-color: #121212;
+    color: #e8eaed;
+}
+
+#everything {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+    overflow: hidden;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+
+#add-website {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+    min-width: 300px;
+}
+
+#addition-button {
+    height: 35px;
+    width: 35px;
+    background-color: #333;
+    border: 2px solid aquamarine;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    border-radius: 10px;
+}
+
+#addition-button:hover {
+    border-color: #ff7f50;
+}
+
+#link-input {
+    height: 35px;
+    width: 100%;
+    max-width: calc(100% - 50px);
+    font-size: 16px;
+    color: aquamarine;
+    background-color: #222;
+    border: 2px solid aquamarine;
+    border-radius: 10px;
+    padding: 0 10px;
+    transition: border-radius 0.3s, border-color 0.3s, width 0.3s ease;
+}
+
+#link-input:focus {
+    border-radius: 15px;
+    border-color: #ff7f50;
+    outline: none;
+}
+
+#websites-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#websites-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+#websites-list::-webkit-scrollbar-thumb {
+    background-color: aquamarine;
+    border-radius: 10px;
+}
+
+#websites-list::-webkit-scrollbar-track {
+    background-color: #1c1c1c;
+}
+
+.website-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    border: 2px solid aquamarine;
+    padding: 10px;
+    gap: 15px;
+    width: 100%;
+    min-width: 300px;
+}
+
+.website-container:hover {
+    background-color: #333;
+}
+
+.website-icon {
+    height: 28px;
+    width: 28px;
+    object-fit: cover;
+}
+
+.website-url {
+    flex-grow: 1;
+    font-size: 14px;
+    font-family: "Arial", sans-serif;
+    color: #e8eaed;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.edition-button,
+.deletion-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.edition-button svg,
+.deletion-button svg {
+    fill: aquamarine;
+    transition: fill 0.3s ease;
+}
+
+.edition-button:hover svg,
+.deletion-button:hover svg {
+    fill: #ff7f50;
+}
