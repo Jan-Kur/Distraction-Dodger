@@ -6,35 +6,45 @@
     "permissions": [
       "storage",
       "activeTab",
-      "tabs"
+      "tabs",
+      "scripting",
+      "declarativeNetRequest"
     ],
+    "declarative_net_request": {
+      "rule_resources": [{
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules.json"
+      }]
+    },
     "background": {
       "service_worker": "background.js"
     },
     "action": {
-      "default_popup": "popup.html",
-      "default_title": "Distraction Dodger",
-      "default_icon": {
-        "16": "icons/icon16.png",
-        "48": "icons/icon48.png",
-        "128": "icons/icon128.png"
-      }
+    "default_popup": "popup.html",
+    "default_title": "Distraction Dodger",
+    "default_icon": {
+        "16": "icons/stopwatch-icon-16-transparent.png",
+        "48": "icons/stopwatch-icon-48-transparent.png",
+        "128": "icons/stopwatch-icon-128-transparent.png"
+    },
+    "default_popup_width": 350,
+    "default_popup_height": 500
     },
     "host_permissions": [
-      "http://*/*",
-      "https://*/*"
+      "<all_urls>"
     ],
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
         "js": ["content-script.js"],
-        "css": ["content-style.css"]
+        "css": ["content-style.css"],
+        "run_at": "document_start"
       }
     ],
     "icons": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
+      "16": "icons/stopwatch-icon-16-transparent.png",
+      "48": "icons/stopwatch-icon-48-transparent.png",
+      "128": "icons/stopwatch-icon-128-transparent.png"
     }
-  }
-  
+ }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distraction Dodger</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="main-container">
+        <div id="everything">
+            <button class="back-button">Back</button>
+            <div class="initial-notification-settings">
+                <div class="toggle-container">
+                    <label for="check" class="toggle-text">Limit website usage:</label>
+                    <input type="checkbox" id="check">
+                    <label for="check" class="toggle-button"></label>
+                </div>
+    
+                <div class="activate-after-container">
+                    <label for="activate-after" class="activate-after-text">Minutes before activation:</label>
+                    <input type="number" id="activate-after" name="activate-after" min="1" max="600" value="1">
+                </div>
+    
+            </div>
+            <button class="add-notification">Add Notification</button>
+            <div id="notifications-list"></div>
+        </div>
+    </div>
+    
+    <script src="website-settings.js"></script>
+</body>
+</html>
