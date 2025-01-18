@@ -186,7 +186,7 @@ async function startTimer(domain) {
                     }
 
                     websiteTimes[domain].timeSpent++;
-                    console.log(websiteTimes[domain].timeSpent);
+                    console.log("time spent on", domain, ": ",websiteTimes[domain].timeSpent);
 
                     chrome.storage.local.set({websiteTimes});
                 } catch (error) {

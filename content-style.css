@@ -46,7 +46,7 @@ body.notification-active {
     gap: 20px;
     z-index: 2147483647;
     isolation: isolate;
-    opacity: 0.9; /*TO BE CHANGED*/
+    opacity: 1;
     overflow: hidden;
 }
 
@@ -75,13 +75,14 @@ body.notification-active {
     border-radius: 10px;
     text-align: center;
     align-content: center;
-    width: 120px;
+    width: fit-content;
+    max-width: 130px;
     height: 35px;
     z-index: 2147483647;
     font-size: 14px;
     line-height: 14px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 .ignore-button {
@@ -90,4 +91,31 @@ body.notification-active {
     border-width: 2px;
     z-index: 2147483647;
     cursor: pointer;
+}
+
+.audio-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.play-button, .pause-button, .reset-button {
+    width: 34px;
+    height: 34px;
+    box-sizing: border-box;
+    line-height: 24px;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.reset-button {
+    width: fit-content;
 }

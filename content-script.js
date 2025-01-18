@@ -68,10 +68,48 @@ function displayNotification(message) {
 
     const audio = document.createElement("audio");
     audio.classList.add("audio");
-    audio.setAttribute("controls", "");
     audio.src = notification.soundEffect;
     audio.setAttribute("autoplay", "");
 
+    console.log("audio.src: ", audio.src);
+
+    const audioButtonsContainer = document.createElement("div");
+    audioButtonsContainer.classList.add("audio-buttons-container");
+
+    const playButton = document.createElement("button");
+    playButton.classList.add("play-button");
+    playButton.style.backgroundColor = notification.secondaryColor;
+    playButton.style.color = notification.mainColor;
+    playButton.style.borderColor = notification.mainColor;
+    playButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M320-200v-560l440 280-440 280Z"/></svg>`;
+    playButton.addEventListener("click", () => {
+        if (audio.paused) {
+            audio.play();
+        }
+    });
+
+    const pauseButton = document.createElement("button");
+    pauseButton.classList.add("pause-button");
+    pauseButton.style.backgroundColor = notification.secondaryColor;
+    pauseButton.style.color = notification.mainColor;
+    pauseButton.style.borderColor = notification.mainColor;
+    pauseButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M560-200v-560h160v560H560Zm-320 0v-560h160v560H240Z"/></svg>`;
+    pauseButton.addEventListener("click", () => {
+        if (!audio.paused) {
+            audio.pause();
+        }
+    });
+
+    const resetButton = document.createElement("button");
+    resetButton.classList.add("reset-button");
+    resetButton.textContent = "Reset";
+    resetButton.style.backgroundColor = notification.secondaryColor;
+    resetButton.style.color = notification.mainColor;
+    resetButton.style.borderColor = notification.mainColor;
+    resetButton.addEventListener("click", () => {
+        audio.currentTime = 0;
+    });
+    
     const text = document.createElement("div");
     text.classList.add("text");
     text.textContent = notification.text;
@@ -105,7 +143,12 @@ function displayNotification(message) {
         });
     });
 
+    audioButtonsContainer.appendChild(playButton);
+    audioButtonsContainer.appendChild(pauseButton);
+    audioButtonsContainer.appendChild(resetButton);
+
     notificationContainer.appendChild(audio);
+    notificationContainer.appendChild(audioButtonsContainer);
     notificationContainer.appendChild(text);
     notificationContainer.appendChild(image);
     notificationContainer.appendChild(timer);

@@ -118,8 +118,6 @@ function addWebsiteToDOM(rootDomain) {
             }
             
             websites = websites.filter(website => website.url !== rootDomain);
-            
-            await unblockWebsite(rootDomain);
     
             await chrome.storage.local.set({ websites, websiteTimes });
             listOfWebsites.removeChild(websiteContainer);
@@ -161,7 +159,7 @@ async function createDefaultWebsite(url) {
                         blockDuration: 0,
                         text: "Get back to work!",
                         image: "https://i.pinimg.com/originals/d2/1e/6a/d21e6a3c2d9f900fa007f218c05c0894.gif",
-                        soundEffect: "https://drive.google.com/uc?export=download&id=1zFKf2t2sK75OEqEI8FaVbW6oJ17_HKuA",
+                        soundEffect: "https://www.dropbox.com/scl/fi/xv1y75n08varlgshd7vfw/oversimplified-alarm-clock-113180-1.mp3?rlkey=z86kgprv9ez6lu76hslx3dbur&raw=1",
                         textColor: "#e8eaed",
                         mainColor: "#7fffd4",
                         secondaryColor: "#222",
@@ -174,7 +172,7 @@ async function createDefaultWebsite(url) {
                         blockDuration: 60,
                         text: "Get back to work!",
                         image: "https://i.pinimg.com/originals/d2/1e/6a/d21e6a3c2d9f900fa007f218c05c0894.gif",
-                        soundEffect: "https://drive.google.com/uc?export=download&id=1zFKf2t2sK75OEqEI8FaVbW6oJ17_HKuA",
+                        soundEffect: "https://www.dropbox.com/scl/fi/xv1y75n08varlgshd7vfw/oversimplified-alarm-clock-113180-1.mp3?rlkey=z86kgprv9ez6lu76hslx3dbur&raw=1",
                         textColor: "#e8eaed",
                         mainColor: "#7fffd4",
                         secondaryColor: "#222",

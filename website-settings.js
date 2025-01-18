@@ -141,9 +141,36 @@ function addNotificationToDOM(id, blockWebsite, activateAfter, blockDuration) {
 
             const imageAudio = document.createElement("audio");
             imageAudio.classList.add("image-audio");
-            imageAudio.setAttribute("controls", "");
             imageAudio.setAttribute("autoplay", "");
+
+            const audioButtonsContainer = document.createElement("div");
+            audioButtonsContainer.classList.add("audio-buttons-container");
+
+            const playButton = document.createElement("button");
+            playButton.classList.add("play-button");
+            playButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M320-200v-560l440 280-440 280Z"/></svg>`;
+            playButton.addEventListener("click", () => {
+                if (imageAudio.paused) {
+                    imageAudio.play();
+                }
+            });
         
+            const pauseButton = document.createElement("button");
+            pauseButton.classList.add("pause-button");
+            pauseButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M560-200v-560h160v560H560Zm-320 0v-560h160v560H240Z"/></svg>`;
+            pauseButton.addEventListener("click", () => {
+                if (!imageAudio.paused) {
+                    imageAudio.pause();
+                }
+            });
+
+            const resetButton = document.createElement("button");
+            resetButton.classList.add("reset-button");
+            resetButton.textContent = "Reset";
+            resetButton.addEventListener("click", () => {
+                imageAudio.currentTime = 0;
+            });
+
             const imageText = document.createElement("div");
             imageText.classList.add("image-text")
 
@@ -158,7 +185,12 @@ function addNotificationToDOM(id, blockWebsite, activateAfter, blockDuration) {
             imageIgnore.classList.add("image-ignore");
             imageIgnore.textContent = "Ignore";
 
+            audioButtonsContainer.appendChild(playButton);
+            audioButtonsContainer.appendChild(pauseButton);
+            audioButtonsContainer.appendChild(resetButton);
+
             imageOfNotification.appendChild(imageAudio);
+            imageOfNotification.appendChild(audioButtonsContainer);
             imageOfNotification.appendChild(imageText);
             imageOfNotification.appendChild(imageImage);
             imageOfNotification.appendChild(imageTimer);
@@ -190,10 +222,6 @@ function addNotificationToDOM(id, blockWebsite, activateAfter, blockDuration) {
                 try {
                     thisNotification.blockWebsite = toggleCheckbox.checked;
                 if (!toggleCheckbox.checked) {
-                    const foundNotification = await chrome.storage.local.get("foundNotification");
-                    if (foundNotification && foundNotification.id === id) {
-                        unblockWebsite(websiteSettingsUrl);
-                    }
                     const existingDurationContainer = editNotificationSettings.querySelector(".block-duration-container");
                     if (existingDurationContainer && existingDurationContainer.parentNode === editNotificationSettings) {
                         editNotificationSettings.removeChild(existingDurationContainer);
@@ -398,6 +426,12 @@ function addNotificationToDOM(id, blockWebsite, activateAfter, blockDuration) {
                 imageTimer.style.color = mainColorInput.value;
                 imageIgnore.style.color = mainColorInput.value;
                 imageIgnore.style.borderColor = mainColorInput.value;
+                playButton.style.color = mainColorInput.value;
+                playButton.style.borderColor = mainColorInput.value;
+                pauseButton.style.color = mainColorInput.value;
+                pauseButton.style.borderColor = mainColorInput.value;
+                resetButton.style.color = mainColorInput.value;
+                resetButton.style.borderColor = mainColorInput.value;
                 chrome.storage.local.set({websites});
             });
             mainColorContainer.appendChild(mainColorLabel);
@@ -417,6 +451,9 @@ function addNotificationToDOM(id, blockWebsite, activateAfter, blockDuration) {
                 thisNotification.secondaryColor = secondaryColorInput.value;
                 imageTimer.style.backgroundColor = secondaryColorInput.value;
                 imageIgnore.style.backgroundColor = secondaryColorInput.value;
+                playButton.style.backgroundColor = secondaryColorInput.value;
+                pauseButton.style.backgroundColor = secondaryColorInput.value;
+                resetButton.style.backgroundColor = secondaryColorInput.value;
                 chrome.storage.local.set({websites});
             });
             secondaryColorContainer.appendChild(secondaryColorLabel);
@@ -457,6 +494,15 @@ function addNotificationToDOM(id, blockWebsite, activateAfter, blockDuration) {
             imageIgnore.style.color = mainColorInput.value;
             imageIgnore.style.borderColor = mainColorInput.value;
             imageOfNotification.style.backgroundColor = backgroundColorInput.value;
+            playButton.style.backgroundColor = secondaryColorInput.value;
+            playButton.style.color = mainColorInput.value;
+            playButton.style.borderColor = mainColorInput.value;
+            pauseButton.style.backgroundColor = secondaryColorInput.value;
+            pauseButton.style.color = mainColorInput.value;
+            pauseButton.style.borderColor = mainColorInput.value;
+            resetButton.style.backgroundColor = secondaryColorInput.value;
+            resetButton.style.color = mainColorInput.value;
+            resetButton.style.borderColor = mainColorInput.value;
 
             if (toggleCheckbox.checked) {
                 imageIgnore.style.display = "none";
@@ -492,11 +538,6 @@ function addNotificationToDOM(id, blockWebsite, activateAfter, blockDuration) {
             websites[websiteIndex].settings.notifications = 
                 websites[websiteIndex].settings.notifications.filter(notification => notification.id !== id);
     
-            const foundNotification = await chrome.storage.local.get("foundNotification");
-            if (foundNotification && foundNotification.id === id) {
-                await unblockWebsite(websiteSettingsUrl);
-            }
-    
             await chrome.storage.local.set({ websites });
             listOfNotifications.removeChild(notificationContainer);
         } catch (error) {
@@ -528,7 +569,7 @@ async function addDefaultNotification(id, blockWebsite, activateAfter, blockDura
             blockDuration: blockWebsite ? Math.max(1, blockDuration) : "0",
             text: "Get back to work!",
             image: "https://i.pinimg.com/originals/d2/1e/6a/d21e6a3c2d9f900fa007f218c05c0894.gif",
-            soundEffect: "https://drive.google.com/uc?export=download&id=1zFKf2t2sK75OEqEI8FaVbW6oJ17_HKuA",
+            soundEffect: "https://www.dropbox.com/scl/fi/xv1y75n08varlgshd7vfw/oversimplified-alarm-clock-113180-1.mp3?rlkey=z86kgprv9ez6lu76hslx3dbur&raw=1",
             textColor: "#e8eaed",
             mainColor: "#7fffd4",
             secondaryColor: "#222",
@@ -549,20 +590,4 @@ function validateNotificationTiming(newActivateAfter, existingNotifications) {
     }
 
     return "Valid";
-}
-
-function generateRuleId(domain) {
-    let hash = 0;
-    for (let i = 0; i < domain.length; i++) {
-        hash = ((hash << 5) - hash) + domain.charCodeAt(i);
-        hash = hash & hash;
-    }
-    return Math.abs(hash);
-}
-
-async function unblockWebsite(domain) {
-    const ruleId = generateRuleId(domain);
-    await chrome.declarativeNetRequest.updateDynamicRules({
-        removeRuleIds: [ruleId]
-    });
 }
